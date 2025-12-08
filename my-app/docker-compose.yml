@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: custom_merch_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres # DB user
+      POSTGRES_PASSWORD: postgres # DB password
+      POSTGRES_DB: postgres # DB name
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: custom_merch_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com # login email for pgAdmin UI
+      PGADMIN_DEFAULT_PASSWORD: password # login password for pgAdmin UI
+    ports:
+      - '5050:80' # pgAdmin will be available at http://localhost:5050
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:

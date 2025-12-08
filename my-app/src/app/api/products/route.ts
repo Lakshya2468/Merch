@@ -1,0 +1,1 @@
+// GET, POST → /api/products
