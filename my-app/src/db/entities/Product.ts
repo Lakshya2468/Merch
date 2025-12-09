@@ -7,7 +7,7 @@ import {
 
 export type ProductType = 'tshirt' | 'hoodie' | 'cap'
 
-@Entity()
+@Entity({ name: 'Products' })
 export class Product {
   @PrimaryGeneratedColumn()
   id!: number
