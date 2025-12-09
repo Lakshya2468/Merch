@@ -1,1 +1,5 @@
-// GET, PATCH, DELETE → /api/products/:id
+import { NextResponse } from 'next/server'
+
+export async function GET() {
+  return NextResponse.json({ message: 'Product detail endpoint' })
+}
