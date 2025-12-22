@@ -7,62 +7,62 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { Address } from './Address'
-import { Cart } from './Cart'
-import { Designer } from './Designer'
-import { DesignReview } from './DesignReview'
-import { Order } from './Order'
-import { Return } from './Return'
-import { Wallet } from './Wallet'
+import type { Address } from './Address'
+import type { Cart } from './Cart'
+import type { Designer } from './Designer'
+import type { DesignReview } from './DesignReview'
+import type { Order } from './Order'
+import type { Return } from './Return'
+import type { Wallet } from './Wallet'
 
 @Entity({ name: 'users' })
 export class User {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
   @Column({ unique: true })
   email!: string
 
-  @Column({ name: 'password_hash' })
+  @Column()
   passwordHash!: string
 
-  @Column({ name: 'full_name' })
+  @Column()
   fullName!: string
 
   @Column({ nullable: true })
   phone?: string
 
-  @Column({ name: 'avatar_url', nullable: true })
+  @Column({ nullable: true })
   avatarUrl?: string
 
-  @Column({ name: 'is_active', default: true })
+  @Column({ default: true })
   isActive!: boolean
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
   // Relationships
-  @OneToOne(() => Designer, designer => designer.user)
+  @OneToOne('Designer', (designer: Designer) => designer.user)
   designer?: Designer
 
-  @OneToOne(() => Wallet, wallet => wallet.user)
+  @OneToOne('Wallet', (wallet: Wallet) => wallet.user)
   wallet?: Wallet
 
-  @OneToMany(() => Address, address => address.user)
+  @OneToMany('Address', (address: Address) => address.user)
   addresses!: Address[]
 
-  @OneToMany(() => Order, order => order.user)
+  @OneToMany('Order', (order: Order) => order.user)
   orders!: Order[]
 
-  @OneToMany(() => Cart, cart => cart.user)
+  @OneToMany('Cart', (cart: Cart) => cart.user)
   carts!: Cart[]
 
-  @OneToMany(() => DesignReview, review => review.user)
+  @OneToMany('DesignReview', (review: DesignReview) => review.user)
   reviews!: DesignReview[]
 
-  @OneToMany(() => Return, return_ => return_.user)
+  @OneToMany('Return', (return_: Return) => return_.user)
   returns!: Return[]
 }

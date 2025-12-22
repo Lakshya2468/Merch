@@ -8,22 +8,21 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { User } from './User'
-import { WalletTransaction } from './WalletTransaction'
+import type { User } from './User'
+import type { WalletTransaction } from './WalletTransaction'
 
 @Entity({ name: 'wallets' })
 export class Wallet {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'user_id', unique: true })
-  userId!: number
+  @Column({ unique: true })
+  userId!: string
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   balance!: number
 
   @Column({
-    name: 'pending_balance',
     type: 'decimal',
     precision: 10,
     scale: 2,
@@ -34,20 +33,23 @@ export class Wallet {
   @Column({ default: 'USD' })
   currency!: string
 
-  @Column({ name: 'last_transaction_at', nullable: true })
+  @Column({ nullable: true })
   lastTransactionAt?: Date
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
   // Relationships
-  @OneToOne(() => User, user => user.wallet)
-  @JoinColumn({ name: 'user_id' })
+  @OneToOne('User', (user: User) => user.wallet)
+  @JoinColumn()
   user!: User
 
-  @OneToMany(() => WalletTransaction, transaction => transaction.wallet)
+  @OneToMany(
+    'WalletTransaction',
+    (transaction: WalletTransaction) => transaction.wallet
+  )
   transactions!: WalletTransaction[]
 }

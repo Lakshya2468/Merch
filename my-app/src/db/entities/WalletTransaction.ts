@@ -6,9 +6,9 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn
 } from 'typeorm'
-import { Order } from './Order'
-import { Return } from './Return'
-import { Wallet } from './Wallet'
+import type { Order } from './Order'
+import type { Return } from './Return'
+import type { Wallet } from './Wallet'
 
 export type TransactionType =
   | 'credit'
@@ -20,25 +20,25 @@ export type TransactionStatus = 'pending' | 'completed' | 'failed' | 'cancelled'
 
 @Entity({ name: 'wallet_transactions' })
 export class WalletTransaction {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'wallet_id' })
-  walletId!: number
+  @Column()
+  walletId!: string
 
-  @Column({ name: 'order_id', nullable: true })
-  orderId?: number
+  @Column({ nullable: true })
+  orderId?: string
 
-  @Column({ name: 'return_id', nullable: true })
-  returnId?: number
+  @Column({ nullable: true })
+  returnId?: string
 
-  @Column({ name: 'transaction_type', type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 20 })
   transactionType!: TransactionType
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   amount!: number
 
-  @Column({ name: 'balance_after', type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   balanceAfter!: number
 
   @Column({ type: 'text', nullable: true })
@@ -50,21 +50,23 @@ export class WalletTransaction {
   @Column({ type: 'json', nullable: true })
   metadata?: string
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
   // Relationships
-  @ManyToOne(() => Wallet, wallet => wallet.transactions)
-  @JoinColumn({ name: 'wallet_id' })
+  @ManyToOne('Wallet', (wallet: Wallet) => wallet.transactions)
+  @JoinColumn()
   wallet!: Wallet
 
-  @ManyToOne(() => Order, order => order.walletTransactions, { nullable: true })
-  @JoinColumn({ name: 'order_id' })
-  order?: Order
-
-  @ManyToOne(() => Return, return_ => return_.walletTransaction, {
+  @ManyToOne('Order', (order: Order) => order.walletTransactions, {
     nullable: true
   })
-  @JoinColumn({ name: 'return_id' })
+  @JoinColumn()
+  order?: Order
+
+  @ManyToOne('Return', (return_: Return) => return_.walletTransaction, {
+    nullable: true
+  })
+  @JoinColumn()
   return?: Return
 }
