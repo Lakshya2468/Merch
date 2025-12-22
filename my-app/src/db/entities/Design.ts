@@ -8,11 +8,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { Cart } from './Cart'
-import { Designer } from './Designer'
-import { DesignReview } from './DesignReview'
-import { Order } from './Order'
-import { ProductDesign } from './ProductDesign'
+import type { Cart } from './Cart'
+import type { Designer } from './Designer'
+import type { DesignReview } from './DesignReview'
+import type { Order } from './Order'
+import type { ProductDesign } from './ProductDesign'
 
 export type DesignType =
   | 'vector'
@@ -23,14 +23,14 @@ export type DesignType =
 
 @Entity({ name: 'designs' })
 export class Design {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'designer_id' })
-  designerId!: number
+  @Column()
+  designerId!: string
 
-  @Column({ name: 'design_category_id', nullable: true })
-  designCategoryId?: number
+  @Column({ nullable: true })
+  designCategoryId?: string
 
   @Column()
   title!: string
@@ -38,13 +38,13 @@ export class Design {
   @Column({ type: 'text', nullable: true })
   description?: string
 
-  @Column({ name: 'design_file_url' })
+  @Column()
   designFileUrl!: string
 
-  @Column({ name: 'thumbnail_url', nullable: true })
+  @Column({ nullable: true })
   thumbnailUrl?: string
 
-  @Column({ name: 'design_type', type: 'varchar', length: 50 })
+  @Column({ type: 'varchar', length: 50 })
   designType!: DesignType
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
@@ -53,35 +53,38 @@ export class Design {
   @Column({ default: 0 })
   downloads!: number
 
-  @Column({ name: 'is_public', default: true })
+  @Column({ default: true })
   isPublic!: boolean
 
-  @Column({ name: 'is_featured', default: false })
+  @Column({ default: false })
   isFeatured!: boolean
 
   @Column({ type: 'json', nullable: true })
   tags?: string[]
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
   // Relationships
-  @ManyToOne(() => Designer, designer => designer.designs)
-  @JoinColumn({ name: 'designer_id' })
+  @ManyToOne('Designer', (designer: Designer) => designer.designs)
+  @JoinColumn()
   designer!: Designer
 
-  @OneToMany(() => ProductDesign, productDesign => productDesign.design)
+  @OneToMany(
+    'ProductDesign',
+    (productDesign: ProductDesign) => productDesign.design
+  )
   productDesigns!: ProductDesign[]
 
-  @OneToMany(() => DesignReview, review => review.design)
+  @OneToMany('DesignReview', (review: DesignReview) => review.design)
   reviews!: DesignReview[]
 
-  @OneToMany(() => Order, order => order.design)
+  @OneToMany('Order', (order: Order) => order.design)
   orders!: Order[]
 
-  @OneToMany(() => Cart, cart => cart.design)
+  @OneToMany('Cart', (cart: Cart) => cart.design)
   carts!: Cart[]
 }

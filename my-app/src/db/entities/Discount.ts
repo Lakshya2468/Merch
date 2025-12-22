@@ -6,14 +6,14 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { DiscountUsage } from './DiscountUsage'
+import type { DiscountUsage } from './DiscountUsage'
 
 export type DiscountType = 'percentage' | 'fixed'
 
 @Entity({ name: 'discounts' })
 export class Discount {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
   @Column({ unique: true })
   code!: string
@@ -24,14 +24,13 @@ export class Discount {
   @Column({ type: 'text', nullable: true })
   description?: string
 
-  @Column({ name: 'discount_type', type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 20 })
   discountType!: DiscountType
 
-  @Column({ name: 'discount_value', type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   discountValue!: number
 
   @Column({
-    name: 'min_order_amount',
     type: 'decimal',
     precision: 10,
     scale: 2,
@@ -40,7 +39,6 @@ export class Discount {
   minOrderAmount!: number
 
   @Column({
-    name: 'max_discount',
     type: 'decimal',
     precision: 10,
     scale: 2,
@@ -48,37 +46,37 @@ export class Discount {
   })
   maxDiscount?: number
 
-  @Column({ name: 'usage_limit', nullable: true })
+  @Column({ nullable: true })
   usageLimit?: number
 
-  @Column({ name: 'used_count', default: 0 })
+  @Column({ default: 0 })
   usedCount!: number
 
-  @Column({ name: 'is_auto_apply', default: false })
+  @Column({ default: false })
   isAutoApply!: boolean
 
-  @Column({ name: 'applicable_products', type: 'json', nullable: true })
+  @Column({ type: 'json', nullable: true })
   applicableProducts?: number[]
 
-  @Column({ name: 'applicable_categories', type: 'json', nullable: true })
+  @Column({ type: 'json', nullable: true })
   applicableCategories?: number[]
 
-  @Column({ name: 'valid_from' })
+  @Column()
   validFrom!: Date
 
-  @Column({ name: 'valid_until' })
+  @Column()
   validUntil!: Date
 
-  @Column({ name: 'is_active', default: true })
+  @Column({ default: true })
   isActive!: boolean
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
   // Relationships
-  @OneToMany(() => DiscountUsage, usage => usage.discount)
+  @OneToMany('DiscountUsage', (usage: DiscountUsage) => usage.discount)
   usages!: DiscountUsage[]
 }

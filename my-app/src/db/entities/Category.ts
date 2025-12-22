@@ -11,11 +11,11 @@ import { ProductCategory } from './ProductCategory'
 
 @Entity({ name: 'categories' })
 export class Category {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'parent_id', nullable: true })
-  parentId?: number
+  @Column({ nullable: true })
+  parentId?: string
 
   @Column()
   name!: string
@@ -26,21 +26,21 @@ export class Category {
   @Column({ type: 'text', nullable: true })
   description?: string
 
-  @Column({ name: 'icon_url', nullable: true })
+  @Column({ nullable: true })
   iconUrl?: string
 
-  @Column({ name: 'sort_order', default: 0 })
+  @Column({ default: 0 })
   sortOrder!: number
 
-  @Column({ name: 'is_active', default: true })
+  @Column({ default: true })
   isActive!: boolean
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
   // Self-referencing relationship
   @ManyToOne(() => Category, category => category.children, { nullable: true })
-  @JoinColumn({ name: 'parent_id' })
+  @JoinColumn()
   parent?: Category
 
   @OneToMany(() => Category, category => category.parent)

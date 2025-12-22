@@ -6,29 +6,29 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn
 } from 'typeorm'
-import { Design } from './Design'
-import { Product } from './Product'
+import type { Design } from './Design'
+import type { Product } from './Product'
 
 @Entity({ name: 'product_designs' })
 export class ProductDesign {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'product_id' })
-  productId!: number
+  @Column()
+  productId!: string
 
-  @Column({ name: 'design_id' })
-  designId!: number
+  @Column()
+  designId!: string
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
   // Relationships
-  @ManyToOne(() => Product, product => product.productDesigns)
-  @JoinColumn({ name: 'product_id' })
+  @ManyToOne('Product', (product: Product) => product.productDesigns)
+  @JoinColumn()
   product!: Product
 
-  @ManyToOne(() => Design, design => design.productDesigns)
-  @JoinColumn({ name: 'design_id' })
+  @ManyToOne('Design', (design: Design) => design.productDesigns)
+  @JoinColumn()
   design!: Design
 }

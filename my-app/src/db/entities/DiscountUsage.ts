@@ -6,40 +6,40 @@ import {
   OneToOne,
   PrimaryGeneratedColumn
 } from 'typeorm'
-import { Discount } from './Discount'
-import { Order } from './Order'
-import { User } from './User'
+import type { Discount } from './Discount'
+import type { Order } from './Order'
+import type { User } from './User'
 
 @Entity({ name: 'discount_usage' })
 export class DiscountUsage {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'discount_id' })
-  discountId!: number
+  @Column()
+  discountId!: string
 
-  @Column({ name: 'user_id' })
-  userId!: number
+  @Column()
+  userId!: string
 
-  @Column({ name: 'order_id', unique: true })
-  orderId!: number
+  @Column({ unique: true })
+  orderId!: string
 
-  @Column({ name: 'discount_amount', type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   discountAmount!: number
 
-  @Column({ name: 'used_at' })
+  @Column()
   usedAt!: Date
 
   // Relationships
-  @ManyToOne(() => Discount, discount => discount.usages)
-  @JoinColumn({ name: 'discount_id' })
+  @ManyToOne('Discount', (discount: Discount) => discount.usages)
+  @JoinColumn()
   discount!: Discount
 
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne('User')
+  @JoinColumn()
   user!: User
 
-  @OneToOne(() => Order, order => order.discountUsage)
-  @JoinColumn({ name: 'order_id' })
+  @OneToOne('Order', (order: Order) => order.discountUsage)
+  @JoinColumn()
   order!: Order
 }

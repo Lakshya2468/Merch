@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { Order } from './Order'
+import type { Order } from './Order'
 
 export type TrackingStatus =
   | 'order_placed'
@@ -20,43 +20,42 @@ export type TrackingStatus =
 
 @Entity({ name: 'order_tracking' })
 export class OrderTracking {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'order_id', unique: true })
-  orderId!: number
+  @Column({ unique: true })
+  orderId!: string
 
-  @Column({ name: 'tracking_number', nullable: true })
+  @Column({ nullable: true })
   trackingNumber?: string
 
-  @Column({ name: 'courier_name', nullable: true })
+  @Column({ nullable: true })
   courierName?: string
 
   @Column({
-    name: 'current_status',
     type: 'varchar',
     length: 30,
     default: 'order_placed'
   })
   currentStatus!: TrackingStatus
 
-  @Column({ name: 'estimated_delivery', nullable: true })
+  @Column({ nullable: true })
   estimatedDelivery?: Date
 
-  @Column({ name: 'tracking_url', nullable: true })
+  @Column({ nullable: true })
   trackingUrl?: string
 
-  @Column({ name: 'status_history', type: 'json', nullable: true })
+  @Column({ type: 'json', nullable: true })
   statusHistory?: string[]
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
   // Relationships
-  @OneToOne(() => Order, order => order.tracking)
-  @JoinColumn({ name: 'order_id' })
+  @OneToOne('Order', (order: Order) => order.tracking)
+  @JoinColumn()
   order!: Order
 }

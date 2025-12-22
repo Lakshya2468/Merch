@@ -8,9 +8,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { Order } from './Order'
-import { User } from './User'
-import { WalletTransaction } from './WalletTransaction'
+import type { Order } from './Order'
+import type { User } from './User'
+import type { WalletTransaction } from './WalletTransaction'
 
 export type ReturnStatus = 'requested' | 'approved' | 'rejected' | 'completed'
 export type RefundStatus = 'pending' | 'processing' | 'completed' | 'failed'
@@ -18,26 +18,25 @@ export type RefundMethod = 'original' | 'wallet' | 'bank_transfer'
 
 @Entity({ name: 'returns' })
 export class Return {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'order_id', unique: true })
-  orderId!: number
+  @Column({ unique: true })
+  orderId!: string
 
-  @Column({ name: 'user_id' })
-  userId!: number
+  @Column()
+  userId!: string
 
-  @Column({ name: 'return_reason' })
+  @Column()
   returnReason!: string
 
-  @Column({ name: 'return_description', type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: true })
   returnDescription?: string
 
-  @Column({ name: 'return_images', type: 'json', nullable: true })
+  @Column({ type: 'json', nullable: true })
   returnImages?: string[]
 
   @Column({
-    name: 'return_status',
     type: 'varchar',
     length: 20,
     default: 'requested'
@@ -45,7 +44,6 @@ export class Return {
   returnStatus!: ReturnStatus
 
   @Column({
-    name: 'refund_amount',
     type: 'decimal',
     precision: 10,
     scale: 2,
@@ -54,7 +52,6 @@ export class Return {
   refundAmount?: number
 
   @Column({
-    name: 'refund_method',
     type: 'varchar',
     length: 20,
     nullable: true
@@ -62,37 +59,39 @@ export class Return {
   refundMethod?: RefundMethod
 
   @Column({
-    name: 'refund_status',
     type: 'varchar',
     length: 20,
     default: 'pending'
   })
   refundStatus!: RefundStatus
 
-  @Column({ name: 'requested_at' })
+  @Column()
   requestedAt!: Date
 
-  @Column({ name: 'approved_at', nullable: true })
+  @Column({ nullable: true })
   approvedAt?: Date
 
-  @Column({ name: 'refunded_at', nullable: true })
+  @Column({ nullable: true })
   refundedAt?: Date
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
   // Relationships
-  @OneToOne(() => Order, order => order.return)
-  @JoinColumn({ name: 'order_id' })
+  @OneToOne('Order', (order: Order) => order.return)
+  @JoinColumn()
   order!: Order
 
-  @ManyToOne(() => User, user => user.returns)
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne('User', (user: User) => user.returns)
+  @JoinColumn()
   user!: User
 
-  @OneToOne(() => WalletTransaction, transaction => transaction.return)
+  @OneToOne(
+    'WalletTransaction',
+    (transaction: WalletTransaction) => transaction.return
+  )
   walletTransaction?: WalletTransaction
 }

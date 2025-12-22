@@ -7,52 +7,52 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { Design } from './Design'
-import { Order } from './Order'
-import { User } from './User'
+import type { Design } from './Design'
+import type { Order } from './Order'
+import type { User } from './User'
 
 @Entity({ name: 'design_reviews' })
 export class DesignReview {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'user_id' })
-  userId!: number
+  @Column()
+  userId!: string
 
-  @Column({ name: 'design_id' })
-  designId!: number
+  @Column()
+  designId!: string
 
-  @Column({ name: 'order_id', nullable: true })
-  orderId?: number
+  @Column({ nullable: true })
+  orderId?: string
 
   @Column({ type: 'int' })
   rating!: number
 
-  @Column({ name: 'review_text', type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: true })
   reviewText?: string
 
-  @Column({ name: 'is_verified_purchase', default: false })
+  @Column({ default: false })
   isVerifiedPurchase!: boolean
 
-  @Column({ name: 'helpful_count', default: 0 })
+  @Column({ default: 0 })
   helpfulCount!: number
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
   // Relationships
-  @ManyToOne(() => User, user => user.reviews)
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne('User', (user: User) => user.reviews)
+  @JoinColumn()
   user!: User
 
-  @ManyToOne(() => Design, design => design.reviews)
-  @JoinColumn({ name: 'design_id' })
+  @ManyToOne('Design', (design: Design) => design.reviews)
+  @JoinColumn()
   design!: Design
 
-  @ManyToOne(() => Order, order => order.designReviews, { nullable: true })
-  @JoinColumn({ name: 'order_id' })
+  @ManyToOne('Order', (order: Order) => order.designReviews, { nullable: true })
+  @JoinColumn()
   order?: Order
 }

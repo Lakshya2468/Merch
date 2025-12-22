@@ -7,31 +7,31 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { User } from './User'
+import type { User } from './User'
 
 export type AddressType = 'home' | 'work' | 'other'
 
 @Entity({ name: 'addresses' })
 export class Address {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'user_id' })
-  userId!: number
+  @Column()
+  userId!: string
 
-  @Column({ name: 'address_type', type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 20 })
   addressType!: AddressType
 
-  @Column({ name: 'full_name' })
+  @Column()
   fullName!: string
 
   @Column()
   phone!: string
 
-  @Column({ name: 'address_line1' })
+  @Column()
   addressLine1!: string
 
-  @Column({ name: 'address_line2', nullable: true })
+  @Column({ nullable: true })
   addressLine2?: string
 
   @Column()
@@ -43,23 +43,23 @@ export class Address {
   @Column()
   country!: string
 
-  @Column({ name: 'postal_code' })
+  @Column()
   postalCode!: string
 
   @Column({ nullable: true })
   landmark?: string
 
-  @Column({ name: 'is_default', default: false })
+  @Column({ default: false })
   isDefault!: boolean
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
   // Relationships
-  @ManyToOne(() => User, user => user.addresses)
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne('User', (user: User) => user.addresses)
+  @JoinColumn()
   user!: User
 }

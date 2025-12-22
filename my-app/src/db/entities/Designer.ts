@@ -7,34 +7,33 @@ import {
   OneToOne,
   PrimaryGeneratedColumn
 } from 'typeorm'
-import { Design } from './Design'
-import { User } from './User'
+import type { Design } from './Design'
+import type { User } from './User'
 
 @Entity({ name: 'designers' })
 export class Designer {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'user_id' })
-  userId!: number
+  @Column()
+  userId!: string
 
-  @Column({ name: 'display_name' })
+  @Column()
   displayName!: string
 
   @Column({ type: 'text', nullable: true })
   bio?: string
 
-  @Column({ name: 'portfolio_url', nullable: true })
+  @Column({ nullable: true })
   portfolioUrl?: string
 
-  @Column({ name: 'commission_rate', type: 'decimal', precision: 5, scale: 2 })
+  @Column({ type: 'decimal', precision: 5, scale: 2 })
   commissionRate!: number
 
-  @Column({ name: 'total_designs', default: 0 })
+  @Column({ default: 0 })
   totalDesigns!: number
 
   @Column({
-    name: 'total_earnings',
     type: 'decimal',
     precision: 10,
     scale: 2,
@@ -45,23 +44,23 @@ export class Designer {
   @Column({ type: 'decimal', precision: 3, scale: 2, nullable: true })
   rating?: number
 
-  @Column({ name: 'review_count', default: 0 })
+  @Column({ default: 0 })
   reviewCount!: number
 
-  @Column({ name: 'is_approved', default: false })
+  @Column({ default: false })
   isApproved!: boolean
 
-  @Column({ name: 'verified_at', nullable: true })
+  @Column({ nullable: true })
   verifiedAt?: Date
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
   // Relationships
-  @OneToOne(() => User, user => user.designer)
-  @JoinColumn({ name: 'user_id' })
+  @OneToOne('User', (user: User) => user.designer)
+  @JoinColumn()
   user!: User
 
-  @OneToMany(() => Design, design => design.designer)
+  @OneToMany('Design', (design: Design) => design.designer)
   designs!: Design[]
 }

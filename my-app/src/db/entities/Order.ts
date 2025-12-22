@@ -9,16 +9,16 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { Address } from './Address'
-import { Design } from './Design'
-import { DesignReview } from './DesignReview'
-import { DiscountUsage } from './DiscountUsage'
-import { OrderTracking } from './OrderTracking'
-import { Payment } from './Payment'
-import { Product } from './Product'
-import { Return } from './Return'
-import { User } from './User'
-import { WalletTransaction } from './WalletTransaction'
+import type { Address } from './Address'
+import type { Design } from './Design'
+import type { DesignReview } from './DesignReview'
+import type { DiscountUsage } from './DiscountUsage'
+import type { OrderTracking } from './OrderTracking'
+import type { Payment } from './Payment'
+import type { Product } from './Product'
+import type { Return } from './Return'
+import type { User } from './User'
+import type { WalletTransaction } from './WalletTransaction'
 
 export type OrderStatus =
   | 'pending'
@@ -31,44 +31,43 @@ export type OrderStatus =
 
 @Entity({ name: 'orders' })
 export class Order {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'user_id' })
-  userId!: number
+  @Column()
+  userId!: string
 
-  @Column({ name: 'address_id' })
-  addressId!: number
+  @Column()
+  addressId!: string
 
-  @Column({ name: 'order_number', unique: true })
+  @Column({ unique: true })
   orderNumber!: string
 
-  @Column({ name: 'product_id' })
-  productId!: number
+  @Column()
+  productId!: string
 
-  @Column({ name: 'design_id', nullable: true })
-  designId?: number
+  @Column({ nullable: true })
+  designId?: string
 
-  @Column({ name: 'custom_design_url', nullable: true })
+  @Column({ nullable: true })
   customDesignUrl?: string
 
-  @Column({ name: 'design_configuration', type: 'json', nullable: true })
+  @Column({ type: 'json', nullable: true })
   designConfiguration?: string
 
-  @Column({ name: 'selected_color', nullable: true })
+  @Column({ nullable: true })
   selectedColor?: string
 
-  @Column({ name: 'selected_size', nullable: true })
+  @Column({ nullable: true })
   selectedSize?: string
 
   @Column({ type: 'int', default: 1 })
   quantity!: number
 
-  @Column({ name: 'unit_price', type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   unitPrice!: number
 
   @Column({
-    name: 'designer_commission',
     type: 'decimal',
     precision: 10,
     scale: 2,
@@ -80,7 +79,6 @@ export class Order {
   tax!: number
 
   @Column({
-    name: 'shipping_cost',
     type: 'decimal',
     precision: 10,
     scale: 2,
@@ -91,56 +89,62 @@ export class Order {
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   discount!: number
 
-  @Column({ name: 'total_amount', type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   totalAmount!: number
 
   @Column({ type: 'varchar', length: 20, default: 'pending' })
   status!: OrderStatus
 
-  @Column({ name: 'ordered_at', nullable: true })
+  @Column({ nullable: true })
   orderedAt?: Date
 
-  @Column({ name: 'delivered_at', nullable: true })
+  @Column({ nullable: true })
   deliveredAt?: Date
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
   // Relationships
-  @ManyToOne(() => User, user => user.orders)
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne('User', (user: User) => user.orders)
+  @JoinColumn()
   user!: User
 
-  @ManyToOne(() => Address)
-  @JoinColumn({ name: 'address_id' })
+  @ManyToOne('Address')
+  @JoinColumn()
   address!: Address
 
-  @ManyToOne(() => Product, product => product.orders)
-  @JoinColumn({ name: 'product_id' })
+  @ManyToOne('Product', (product: Product) => product.orders)
+  @JoinColumn()
   product!: Product
 
-  @ManyToOne(() => Design, design => design.orders, { nullable: true })
-  @JoinColumn({ name: 'design_id' })
+  @ManyToOne('Design', (design: Design) => design.orders, { nullable: true })
+  @JoinColumn()
   design?: Design
 
-  @OneToOne(() => Payment, payment => payment.order)
+  @OneToOne('Payment', (payment: Payment) => payment.order)
   payment?: Payment
 
-  @OneToOne(() => Return, return_ => return_.order)
+  @OneToOne('Return', (return_: Return) => return_.order)
   return?: Return
 
-  @OneToOne(() => OrderTracking, tracking => tracking.order)
+  @OneToOne('OrderTracking', (tracking: OrderTracking) => tracking.order)
   tracking?: OrderTracking
 
-  @OneToOne(() => DiscountUsage, discountUsage => discountUsage.order)
+  @OneToOne(
+    'DiscountUsage',
+    (discountUsage: DiscountUsage) => discountUsage.order
+  )
   discountUsage?: DiscountUsage
 
-  @OneToMany(() => WalletTransaction, transaction => transaction.order)
+  @OneToMany(
+    'WalletTransaction',
+    (transaction: WalletTransaction) => transaction.order
+  )
   walletTransactions!: WalletTransaction[]
 
-  @OneToMany(() => DesignReview, review => review.order)
+  @OneToMany('DesignReview', (review: DesignReview) => review.order)
   designReviews!: DesignReview[]
 }

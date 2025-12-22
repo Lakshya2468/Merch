@@ -6,29 +6,29 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn
 } from 'typeorm'
-import { Category } from './Category'
-import { Product } from './Product'
+import type { Category } from './Category'
+import type { Product } from './Product'
 
 @Entity({ name: 'product_categories' })
 export class ProductCategory {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'product_id' })
-  productId!: number
+  @Column()
+  productId!: string
 
-  @Column({ name: 'category_id' })
-  categoryId!: number
+  @Column()
+  categoryId!: string
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
   // Relationships
-  @ManyToOne(() => Product, product => product.productCategories)
-  @JoinColumn({ name: 'product_id' })
+  @ManyToOne('Product', (product: Product) => product.productCategories)
+  @JoinColumn()
   product!: Product
 
-  @ManyToOne(() => Category, category => category.productCategories)
-  @JoinColumn({ name: 'category_id' })
+  @ManyToOne('Category', (category: Category) => category.productCategories)
+  @JoinColumn()
   category!: Category
 }

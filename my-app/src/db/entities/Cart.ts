@@ -7,52 +7,52 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { Design } from './Design'
-import { Product } from './Product'
-import { User } from './User'
+import type { Design } from './Design'
+import type { Product } from './Product'
+import type { User } from './User'
 
 @Entity({ name: 'carts' })
 export class Cart {
-  @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ name: 'user_id' })
-  userId!: number
+  @Column()
+  userId!: string
 
-  @Column({ name: 'product_id' })
-  productId!: number
+  @Column()
+  productId!: string
 
-  @Column({ name: 'design_id', nullable: true })
-  designId?: number
+  @Column({ nullable: true })
+  designId?: string
 
-  @Column({ name: 'custom_design_url', nullable: true })
+  @Column({ nullable: true })
   customDesignUrl?: string
 
-  @Column({ name: 'selected_color', nullable: true })
+  @Column({ nullable: true })
   selectedColor?: string
 
-  @Column({ name: 'selected_size', nullable: true })
+  @Column({ nullable: true })
   selectedSize?: string
 
   @Column({ type: 'int', default: 1 })
   quantity!: number
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt!: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt!: Date
 
   // Relationships
-  @ManyToOne(() => User, user => user.carts)
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne('User', (user: User) => user.carts)
+  @JoinColumn()
   user!: User
 
-  @ManyToOne(() => Product, product => product.carts)
-  @JoinColumn({ name: 'product_id' })
+  @ManyToOne('Product', (product: Product) => product.carts)
+  @JoinColumn()
   product!: Product
 
-  @ManyToOne(() => Design, design => design.carts, { nullable: true })
-  @JoinColumn({ name: 'design_id' })
+  @ManyToOne('Design', (design: Design) => design.carts, { nullable: true })
+  @JoinColumn()
   design?: Design
 }
