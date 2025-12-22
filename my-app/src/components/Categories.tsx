@@ -1,77 +1,77 @@
-import { Award, Briefcase, Coffee, Heart, Shirt, Umbrella } from 'lucide-react'
-import Link from 'next/link'
+import { Award, Briefcase, Coffee, Heart, Shirt, Umbrella } from "lucide-react";
+import Link from "next/link";
 
 interface CategoriesProps {
-  showTitle?: boolean
-  showDescription?: boolean
-  showViewAllButton?: boolean
-  limit?: number
+  showTitle?: boolean;
+  showDescription?: boolean;
+  showViewAllButton?: boolean;
+  limit?: number;
 }
 
 export const categories = [
   {
     id: 1,
-    name: 'T-Shirts',
-    slug: 'tshirts',
+    name: "T-Shirts",
+    slug: "t-shirts",
     icon: Shirt,
-    description: 'Classic & Trendy Tees',
-    color: 'from-purple-500 to-pink-500',
-    count: '2.5K+ Designs'
+    description: "Classic & Trendy Tees",
+    color: "from-purple-500 to-pink-500",
+    count: "2.5K+ Designs",
   },
   {
     id: 2,
-    name: 'Hoodies',
-    slug: 'hoodies',
+    name: "Hoodies",
+    slug: "hoodies",
     icon: Coffee,
-    description: 'Cozy & Stylish',
-    color: 'from-blue-500 to-cyan-500',
-    count: '1.8K+ Designs'
+    description: "Cozy & Stylish",
+    color: "from-blue-500 to-cyan-500",
+    count: "1.8K+ Designs",
   },
   {
     id: 3,
-    name: 'Accessories',
-    slug: 'accessories',
+    name: "Accessories",
+    slug: "accessories",
     icon: Umbrella,
-    description: 'Caps, Bags & More',
-    color: 'from-green-500 to-emerald-500',
-    count: '950+ Items'
+    description: "Caps, Bags & More",
+    color: "from-green-500 to-emerald-500",
+    count: "950+ Items",
   },
   {
     id: 4,
-    name: 'Business',
-    slug: 'business',
+    name: "Business",
+    slug: "business",
     icon: Briefcase,
-    description: 'Corporate Merch',
-    color: 'from-orange-500 to-red-500',
-    count: '600+ Items'
+    description: "Corporate Merch",
+    color: "from-orange-500 to-red-500",
+    count: "600+ Items",
   },
   {
     id: 5,
-    name: 'Premium',
-    slug: 'premium',
+    name: "Premium",
+    slug: "premium",
     icon: Award,
-    description: 'Exclusive Collection',
-    color: 'from-yellow-500 to-orange-500',
-    count: '450+ Designs'
+    description: "Exclusive Collection",
+    color: "from-yellow-500 to-orange-500",
+    count: "450+ Designs",
   },
   {
     id: 6,
-    name: 'Custom',
-    slug: 'custom',
+    name: "Custom",
+    slug: "custom",
     icon: Heart,
-    description: 'Your Own Design',
-    color: 'from-pink-500 to-rose-500',
-    count: 'Unlimited'
-  }
-]
+    description: "Your Own Design",
+    color: "from-pink-500 to-rose-500",
+    count: "Unlimited",
+  },
+];
 
 export default function Categories({
   showTitle = true,
   showDescription = true,
   showViewAllButton = true,
-  limit
+  limit,
 }: CategoriesProps = {}) {
-  const displayedCategories = limit ? categories.slice(0, limit) : categories
+  const displayedCategories = limit ? categories.slice(0, limit) : categories;
 
   return (
     <section className="py-20 bg-white">
@@ -93,12 +93,12 @@ export default function Categories({
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedCategories.map(category => {
-            const Icon = category.icon
+          {displayedCategories.map((category) => {
+            const Icon = category.icon;
             return (
               <Link
                 key={category.id}
-                href={`/categories/${category.slug}`}
+                href={`/products?category=${category.slug}`}
                 className="group relative bg-white rounded-2xl border-2 border-gray-100 p-8 hover:border-transparent hover:shadow-2xl transition-all duration-300 overflow-hidden"
               >
                 {/* Background Gradient */}
@@ -145,7 +145,7 @@ export default function Categories({
                   </div>
                 </div>
               </Link>
-            )
+            );
           })}
         </div>
 
@@ -175,5 +175,5 @@ export default function Categories({
         )}
       </div>
     </section>
-  )
+  );
 }

@@ -1,74 +1,8 @@
-import { Download, Heart, Star, TrendingUp } from 'lucide-react'
-import Link from 'next/link'
+import { Download, Heart, Star, TrendingUp } from "lucide-react";
+import Link from "next/link";
+import { getAllDesigns } from "@/data/designsData";
 
-const featuredDesigns = [
-  {
-    id: 1,
-    title: 'Geometric Dreams',
-    designer: 'Sarah Chen',
-    rating: 4.9,
-    downloads: 2840,
-    price: 15.99,
-    category: 'Abstract',
-    trending: true,
-    colors: ['#FF6B6B', '#4ECDC4', '#45B7D1']
-  },
-  {
-    id: 2,
-    title: 'Vintage Vibes',
-    designer: 'Mike Rodriguez',
-    rating: 4.8,
-    downloads: 3210,
-    price: 12.99,
-    category: 'Retro',
-    trending: true,
-    colors: ['#F9CA24', '#F0932B', '#EB4D4B']
-  },
-  {
-    id: 3,
-    title: "Nature's Beauty",
-    designer: 'Emma Wilson',
-    rating: 5.0,
-    downloads: 1890,
-    price: 18.99,
-    category: 'Nature',
-    trending: false,
-    colors: ['#6AB04C', '#22A6B3', '#30336B']
-  },
-  {
-    id: 4,
-    title: 'Urban Street',
-    designer: 'Alex Turner',
-    rating: 4.7,
-    downloads: 2650,
-    price: 14.99,
-    category: 'Street Art',
-    trending: true,
-    colors: ['#000000', '#FFFFFF', '#FF6348']
-  },
-  {
-    id: 5,
-    title: 'Cosmic Journey',
-    designer: 'Luna Park',
-    rating: 4.9,
-    downloads: 3450,
-    price: 16.99,
-    category: 'Space',
-    trending: false,
-    colors: ['#5F27CD', '#341F97', '#00D2D3']
-  },
-  {
-    id: 6,
-    title: 'Minimalist Wave',
-    designer: 'John Davis',
-    rating: 4.6,
-    downloads: 1720,
-    price: 11.99,
-    category: 'Minimal',
-    trending: false,
-    colors: ['#2C3E50', '#3498DB', '#ECF0F1']
-  }
-]
+const featuredDesigns = getAllDesigns();
 
 export default function FeaturedDesigns() {
   return (
@@ -91,7 +25,7 @@ export default function FeaturedDesigns() {
 
         {/* Designs Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredDesigns.map(design => (
+          {featuredDesigns.map((design) => (
             <Link
               key={design.id}
               href={`/designs/${design.id}`}
@@ -110,7 +44,7 @@ export default function FeaturedDesigns() {
                           backgroundColor: color,
                           clipPath: `polygon(${idx * 33}% 0, ${
                             (idx + 1) * 33
-                          }% 0, ${(idx + 1) * 33}% 100%, ${idx * 33}% 100%)`
+                          }% 0, ${(idx + 1) * 33}% 100%, ${idx * 33}% 100%)`,
                         }}
                       />
                     ))}
@@ -150,7 +84,9 @@ export default function FeaturedDesigns() {
                   <h3 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors">
                     {design.title}
                   </h3>
-                  <p className="text-sm text-gray-600">by {design.designer}</p>
+                  <p className="text-sm text-gray-600">
+                    by {design.designer.name}
+                  </p>
                 </div>
 
                 {/* Stats */}
@@ -198,5 +134,5 @@ export default function FeaturedDesigns() {
         </div>
       </div>
     </section>
-  )
+  );
 }
