@@ -1,6 +1,7 @@
 'use client'
 
 import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 import { ProductCard } from '@/components/ProductCard'
 import { useState } from 'react'
 
@@ -181,6 +182,9 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navbar */}
+      <Navbar />
+
       {/* Header Section */}
       <section className="py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
