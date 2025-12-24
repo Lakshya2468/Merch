@@ -1,23 +1,29 @@
 'use client'
 
-import { AlertCircle, Eye, EyeOff, Lock, Mail } from 'lucide-react'
+import { AlertCircle, Eye, EyeOff, Lock, Mail, User } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-export default function LoginPage() {
+export default function SignupPage() {
   const router = useRouter()
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   })
   const [showPassword, setShowPassword] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required'
+    }
 
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required'
@@ -27,6 +33,12 @@ export default function LoginPage() {
 
     if (!formData.password) {
       newErrors.password = 'Password is required'
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters'
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match'
     }
 
     setErrors(newErrors)
@@ -43,15 +55,15 @@ export default function LoginPage() {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false)
-      // In production, handle actual login here
-      alert('Login successful! (This is a demo)')
+      // In production, handle actual signup here
+      alert('Signup successful! (This is a demo)')
       router.push('/dashboard')
     }, 1500)
   }
 
-  const handleGoogleLogin = () => {
+  const handleGoogleSignup = () => {
     // In production, this would redirect to Google OAuth
-    alert('Google login coming soon! Set up OAuth credentials first.')
+    alert('Google signup coming soon! Set up OAuth credentials first.')
   }
 
   return (
@@ -66,14 +78,52 @@ export default function LoginPage() {
             <span className="text-3xl font-bold text-gray-900">MerchStore</span>
           </Link>
           <h2 className="text-3xl font-bold text-gray-900 mb-2">
-            Welcome back
+            Create your account
           </h2>
-          <p className="text-gray-600">Sign in to your account to continue</p>
+          <p className="text-gray-600">
+            Start designing your custom merchandise today
+          </p>
         </div>
 
         {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 border-2 border-gray-100">
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Name Field */}
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-semibold text-gray-700 mb-2"
+              >
+                Full Name
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <User className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={e =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className={`block w-full pl-10 pr-3 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${
+                    errors.name
+                      ? 'border-red-300 focus:border-red-500'
+                      : 'border-gray-200 focus:border-purple-500'
+                  }`}
+                  placeholder="John Doe"
+                />
+              </div>
+              {errors.name && (
+                <p className="mt-2 text-sm text-red-600 flex items-center">
+                  <AlertCircle className="w-4 h-4 mr-1" />
+                  {errors.name}
+                </p>
+              )}
+            </div>
+
             {/* Email Field */}
             <div>
               <label
@@ -90,7 +140,6 @@ export default function LoginPage() {
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
                   value={formData.email}
                   onChange={e =>
                     setFormData({ ...formData, email: e.target.value })
@@ -127,7 +176,6 @@ export default function LoginPage() {
                   id="password"
                   name="password"
                   type={showPassword ? 'text' : 'password'}
-                  autoComplete="current-password"
                   value={formData.password}
                   onChange={e =>
                     setFormData({ ...formData, password: e.target.value })
@@ -159,33 +207,54 @@ export default function LoginPage() {
               )}
             </div>
 
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
+            {/* Confirm Password Field */}
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-semibold text-gray-700 mb-2"
+              >
+                Confirm Password
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-gray-400" />
+                </div>
                 <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={e => setRememberMe(e.target.checked)}
-                  className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded cursor-pointer"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  value={formData.confirmPassword}
+                  onChange={e =>
+                    setFormData({
+                      ...formData,
+                      confirmPassword: e.target.value
+                    })
+                  }
+                  className={`block w-full pl-10 pr-10 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${
+                    errors.confirmPassword
+                      ? 'border-red-300 focus:border-red-500'
+                      : 'border-gray-200 focus:border-purple-500'
+                  }`}
+                  placeholder="••••••••"
                 />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-700 cursor-pointer"
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
                 >
-                  Remember me
-                </label>
+                  {showConfirmPassword ? (
+                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                  ) : (
+                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                  )}
+                </button>
               </div>
-
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-purple-600 hover:text-purple-700 transition-colors"
-                >
-                  Forgot password?
-                </a>
-              </div>
+              {errors.confirmPassword && (
+                <p className="mt-2 text-sm text-red-600 flex items-center">
+                  <AlertCircle className="w-4 h-4 mr-1" />
+                  {errors.confirmPassword}
+                </p>
+              )}
             </div>
 
             {/* Submit Button */}
@@ -197,10 +266,10 @@ export default function LoginPage() {
               {isLoading ? (
                 <div className="flex items-center">
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Signing in...
+                  Creating account...
                 </div>
               ) : (
-                'Sign In'
+                'Create Account'
               )}
             </button>
 
@@ -216,10 +285,10 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Google Sign In Button */}
+            {/* Google Sign Up Button */}
             <button
               type="button"
-              onClick={handleGoogleLogin}
+              onClick={handleGoogleSignup}
               className="w-full flex items-center justify-center py-3 px-4 border-2 border-gray-300 rounded-xl shadow-sm bg-white text-sm font-semibold text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -240,48 +309,35 @@ export default function LoginPage() {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              Sign in with Google
+              Sign up with Google
             </button>
           </form>
 
-          {/* Sign Up Link */}
+          {/* Sign In Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
+              Already have an account?{' '}
               <Link
-                href="/signup"
+                href="/login"
                 className="font-semibold text-purple-600 hover:text-purple-700 transition-colors"
               >
-                Sign up
+                Sign in
               </Link>
             </p>
           </div>
         </div>
 
-        {/* Security Notice */}
-        <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
-          <div className="flex items-start">
-            <div className="flex-shrink-0">
-              <svg
-                className="h-5 w-5 text-blue-600"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <p className="text-sm text-blue-700">
-                Your data is secure and encrypted. We never share your
-                information with third parties.
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* Terms */}
+        <p className="text-center text-xs text-gray-500">
+          By signing up, you agree to our{' '}
+          <a href="#" className="text-purple-600 hover:text-purple-700">
+            Terms of Service
+          </a>{' '}
+          and{' '}
+          <a href="#" className="text-purple-600 hover:text-purple-700">
+            Privacy Policy
+          </a>
+        </p>
       </div>
     </div>
   )

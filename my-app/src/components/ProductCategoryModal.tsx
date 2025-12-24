@@ -1,29 +1,34 @@
-"use client";
+'use client'
 
-import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { categories } from "./Categories";
+import { X } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { categories } from './Categories'
 
 interface ProductCategoryModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  designId: number;
+  isOpen: boolean
+  onClose: () => void
+  designId?: number // Optional: undefined means no pre-selected design
 }
 
 export default function ProductCategoryModal({
   isOpen,
   onClose,
-  designId,
+  designId
 }: ProductCategoryModalProps) {
-  const router = useRouter();
+  const router = useRouter()
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   const handleCategorySelect = (categorySlug: string) => {
-    // Navigate to product detail page with design and category
-    router.push(`/product/${categorySlug}/${designId}`);
-    onClose();
-  };
+    if (designId !== undefined) {
+      // Navigate with pre-selected design
+      router.push(`/product/${categorySlug}/${designId}?from=designs`)
+    } else {
+      // Navigate without design (customize from scratch)
+      router.push(`/product/${categorySlug}/0`)
+    }
+    onClose()
+  }
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
@@ -50,15 +55,17 @@ export default function ProductCategoryModal({
               Choose Your Product
             </h2>
             <p className="text-gray-600">
-              Select which product you'd like to see this design on
+              {designId !== undefined
+                ? 'Select which product you like to see this design on'
+                : 'Select which product you want to customize'}
             </p>
           </div>
 
           {/* Categories Grid */}
           <div className="p-8">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {categories.map((category) => {
-                const Icon = category.icon;
+              {categories.map(category => {
+                const Icon = category.icon
                 return (
                   <button
                     key={category.id}
@@ -108,7 +115,7 @@ export default function ProductCategoryModal({
                       </svg>
                     </div>
                   </button>
-                );
+                )
               })}
             </div>
           </div>
@@ -116,11 +123,11 @@ export default function ProductCategoryModal({
           {/* Footer */}
           <div className="p-6 bg-gray-50 rounded-b-3xl border-t border-gray-100">
             <p className="text-sm text-gray-600 text-center">
-              Can't decide? You can always change the product later
+              Can not decide? You can always change the product later
             </p>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

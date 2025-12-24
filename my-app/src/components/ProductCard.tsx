@@ -8,6 +8,8 @@ interface Product {
   price: number
   stock: number
   imageUrl?: string
+  category: string
+  designId: number
 }
 
 interface ProductCardProps {
@@ -15,9 +17,14 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  // Navigate to product customizer with category and the product's design ID
+  // Add ?from=designs parameter to pre-apply the design
+  // User can still change the design if they want
+  const customizeUrl = `/product/${product.category}/${product.designId}?from=designs`
+
   return (
     <Link
-      href={`/products/${product.id}`}
+      href={customizeUrl}
       className="group relative bg-white rounded-2xl border-2 border-gray-100 overflow-hidden hover:border-transparent hover:shadow-2xl transition-all duration-300"
     >
       {/* Background Gradient on Hover */}
@@ -89,21 +96,28 @@ export function ProductCard({ product }: ProductCardProps) {
                 In Stock
               </span>
             ) : (
-              <span className="text-xs font-semibold text-red-600\">
+              <span className="text-xs font-semibold text-red-600">
                 Out of Stock
               </span>
             )}
           </div>
 
-          {/* Explore Arrow */}
-          <div className="flex items-center text-purple-600 font-semibold group-hover:translate-x-2 transition-transform pt-2\">
-            <span>View Details</span>
+          {/* Customize Arrow */}
+          <div className="flex items-center text-purple-600 font-semibold group-hover:translate-x-2 transition-transform pt-2">
+            <span>Customize Now</span>
             <svg
-              className="w-5 h-5 ml-2\"
-              fill="none\"
-              stroke="currentColor\"
-              viewBox="0 0 24 24\"
-            ></svg>
+              className="w-5 h-5 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
           </div>
         </div>
       </div>

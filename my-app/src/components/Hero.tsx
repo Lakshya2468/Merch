@@ -1,7 +1,13 @@
+'use client'
+
 import { Palette, Shirt, Sparkles } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
+import ProductCategoryModal from './ProductCategoryModal'
 
 export default function Hero() {
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
+
   return (
     <section className="relative bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
@@ -27,13 +33,13 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/custom"
+              <button
+                onClick={() => setIsCategoryModalOpen(true)}
                 className="inline-flex items-center justify-center px-8 py-4 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 <Palette className="w-5 h-5 mr-2" />
                 Start Customizing
-              </Link>
+              </button>
               <Link
                 href="/products"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-purple-600 font-semibold rounded-lg border-2 border-purple-600 hover:bg-purple-50 transition-all"
@@ -103,6 +109,11 @@ export default function Hero() {
           />
         </svg>
       </div>
+
+      <ProductCategoryModal
+        isOpen={isCategoryModalOpen}
+        onClose={() => setIsCategoryModalOpen(false)}
+      />
     </section>
   )
 }

@@ -3,9 +3,11 @@
 import { Menu, Search, ShoppingCart, User, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+import ProductCategoryModal from './ProductCategoryModal'
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-md">
@@ -39,12 +41,12 @@ export default function Navbar() {
             >
               Categories
             </Link>
-            <Link
-              href="/custom"
+            <button
+              onClick={() => setIsCategoryModalOpen(true)}
               className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
             >
               Customize
-            </Link>
+            </button>
           </div>
 
           {/* Right Side Actions */}
@@ -121,13 +123,15 @@ export default function Navbar() {
             >
               Categories
             </Link>
-            <Link
-              href="/custom"
-              className="block text-gray-700 hover:text-purple-600 py-2 font-medium"
-              onClick={() => setIsMenuOpen(false)}
+            <button
+              onClick={() => {
+                setIsCategoryModalOpen(true)
+                setIsMenuOpen(false)
+              }}
+              className="block text-left w-full text-gray-700 hover:text-purple-600 py-2 font-medium"
             >
               Customize
-            </Link>
+            </button>
             <Link
               href="/dashboard"
               className="block text-gray-700 hover:text-purple-600 py-2 font-medium"
@@ -145,6 +149,11 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+      <ProductCategoryModal
+        isOpen={isCategoryModalOpen}
+        onClose={() => setIsCategoryModalOpen(false)}
+      />
     </nav>
   )
 }

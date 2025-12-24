@@ -1,10 +1,22 @@
-import { Download, Heart, Star, TrendingUp } from "lucide-react";
-import Link from "next/link";
-import { getAllDesigns } from "@/data/designsData";
+'use client'
 
-const featuredDesigns = getAllDesigns();
+import { getAllDesigns } from '@/data/designsData'
+import { Download, Heart, Star, TrendingUp } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
+import ProductCategoryModal from './ProductCategoryModal'
+
+const featuredDesigns = getAllDesigns()
 
 export default function FeaturedDesigns() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedDesignId, setSelectedDesignId] = useState<number | null>(null)
+
+  const handleDesignClick = (designId: number) => {
+    setSelectedDesignId(designId)
+    setIsModalOpen(true)
+  }
+
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,11 +37,11 @@ export default function FeaturedDesigns() {
 
         {/* Designs Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredDesigns.map((design) => (
-            <Link
+          {featuredDesigns.map(design => (
+            <div
               key={design.id}
-              href={`/designs/${design.id}`}
-              className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              onClick={() => handleDesignClick(design.id)}
+              className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
             >
               {/* Design Preview */}
               <div className="relative aspect-square bg-gradient-to-br from-gray-100 to-gray-200 p-8">
@@ -44,7 +56,7 @@ export default function FeaturedDesigns() {
                           backgroundColor: color,
                           clipPath: `polygon(${idx * 33}% 0, ${
                             (idx + 1) * 33
-                          }% 0, ${(idx + 1) * 33}% 100%, ${idx * 33}% 100%)`,
+                          }% 0, ${(idx + 1) * 33}% 100%, ${idx * 33}% 100%)`
                         }}
                       />
                     ))}
@@ -59,14 +71,26 @@ export default function FeaturedDesigns() {
                       <span>Trending</span>
                     </span>
                   )}
-                  <button className="ml-auto bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-colors">
+                  <button
+                    onClick={e => {
+                      e.stopPropagation()
+                      // Handle favorite toggle here
+                    }}
+                    className="ml-auto bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-colors"
+                  >
                     <Heart className="w-5 h-5 text-gray-600 hover:text-red-500 transition-colors" />
                   </button>
                 </div>
 
                 {/* Quick View Overlay */}
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <button className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <button
+                    onClick={e => {
+                      e.stopPropagation()
+                      handleDesignClick(design.id)
+                    }}
+                    className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                  >
                     Quick View
                   </button>
                 </div>
@@ -106,7 +130,7 @@ export default function FeaturedDesigns() {
                   </div>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
 
@@ -133,6 +157,15 @@ export default function FeaturedDesigns() {
           </Link>
         </div>
       </div>
+
+      {/* Product Category Modal */}
+      {selectedDesignId !== null && (
+        <ProductCategoryModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          designId={selectedDesignId}
+        />
+      )}
     </section>
-  );
+  )
 }
