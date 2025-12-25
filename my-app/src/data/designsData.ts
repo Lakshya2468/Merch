@@ -2,282 +2,292 @@
 export const designsData = [
   {
     id: 1,
-    title: 'Geometric Dreams',
+    title: "Geometric Dreams",
+    designerId: "sarah-chen",
     designer: {
-      name: 'Sarah Chen',
-      avatar: 'https://i.pravatar.cc/150?img=1',
-      bio: 'Digital artist specializing in abstract and geometric designs'
+      name: "Sarah Chen",
+      avatar: "https://i.pravatar.cc/150?img=1",
+      bio: "Digital artist specializing in abstract and geometric designs",
     },
     rating: 4.9,
     downloads: 2840,
     price: 15.99,
-    category: 'Abstract',
+    category: "Abstract",
     trending: true,
-    colors: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
+    colors: ["#FF6B6B", "#4ECDC4", "#45B7D1"],
     description:
-      'A mesmerizing blend of geometric shapes and vibrant colors that creates a dreamlike atmosphere. Perfect for those who appreciate modern abstract art.',
+      "A mesmerizing blend of geometric shapes and vibrant colors that creates a dreamlike atmosphere. Perfect for those who appreciate modern abstract art.",
     images: {
       front:
-        'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800',
-      back: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800',
-      left: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800',
+        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800",
+      back: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800",
+      left: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800",
       right:
-        'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800'
+        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800",
     },
-    tags: ['Abstract', 'Geometric', 'Modern', 'Colorful'],
-    compatibleProducts: ['t-shirts', 'hoodies', 'accessories'],
-    materials: 'Works best on 100% cotton and cotton blends',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'],
+    tags: ["Abstract", "Geometric", "Modern", "Colorful"],
+    compatibleProducts: ["t-shirts", "hoodies", "accessories"],
+    materials: "Works best on 100% cotton and cotton blends",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
     variations: [
       {
-        id: 'geo-main',
-        name: 'Main Pattern',
-        description: 'Primary geometric design with full color palette',
-        colors: ['#FF6B6B', '#4ECDC4', '#45B7D1']
+        id: "geo-main",
+        name: "Main Pattern",
+        description: "Primary geometric design with full color palette",
+        colors: ["#FF6B6B", "#4ECDC4", "#45B7D1"],
       },
       {
-        id: 'geo-alt',
-        name: 'Alternate Pattern',
-        description: 'Inverted geometric pattern with different arrangement',
-        colors: ['#45B7D1', '#FF6B6B', '#4ECDC4']
+        id: "geo-alt",
+        name: "Alternate Pattern",
+        description: "Inverted geometric pattern with different arrangement",
+        colors: ["#45B7D1", "#FF6B6B", "#4ECDC4"],
       },
       {
-        id: 'geo-minimal',
-        name: 'Minimal Accent',
-        description: 'Simplified version for subtle placement',
-        colors: ['#4ECDC4', '#45B7D1']
-      }
-    ]
+        id: "geo-minimal",
+        name: "Minimal Accent",
+        description: "Simplified version for subtle placement",
+        colors: ["#4ECDC4", "#45B7D1"],
+      },
+    ],
   },
   {
     id: 2,
-    title: 'Vintage Vibes',
+    title: "Vintage Vibes",
+    designerId: "mike-rodriguez",
     designer: {
-      name: 'Mike Rodriguez',
-      avatar: 'https://i.pravatar.cc/150?img=12',
-      bio: 'Retro design enthusiast with 10+ years of experience'
+      name: "Mike Rodriguez",
+      avatar: "https://i.pravatar.cc/150?img=12",
+      bio: "Retro design enthusiast with 10+ years of experience",
     },
     rating: 4.8,
     downloads: 3210,
     price: 12.99,
-    category: 'Retro',
+    category: "Retro",
     trending: true,
-    colors: ['#F9CA24', '#F0932B', '#EB4D4B'],
+    colors: ["#F9CA24", "#F0932B", "#EB4D4B"],
     description:
-      'Nostalgic retro design inspired by the golden age of vintage advertising. Brings back the classic aesthetic with a modern twist.',
+      "Nostalgic retro design inspired by the golden age of vintage advertising. Brings back the classic aesthetic with a modern twist.",
     images: {
       front:
-        'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800',
-      back: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800',
-      left: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800',
+        "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800",
+      back: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800",
+      left: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800",
       right:
-        'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800'
+        "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800",
     },
-    tags: ['Retro', 'Vintage', 'Classic', 'Nostalgic'],
-    compatibleProducts: ['t-shirts', 'hoodies', 'accessories'],
-    materials: 'Optimized for screen printing on various fabrics',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'],
+    tags: ["Retro", "Vintage", "Classic", "Nostalgic"],
+    compatibleProducts: ["t-shirts", "hoodies", "accessories"],
+    materials: "Optimized for screen printing on various fabrics",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
     variations: [
       {
-        id: 'vintage-main',
-        name: 'Classic Badge',
-        description: 'Full vintage badge design',
-        colors: ['#F9CA24', '#F0932B', '#EB4D4B']
+        id: "vintage-main",
+        name: "Classic Badge",
+        description: "Full vintage badge design",
+        colors: ["#F9CA24", "#F0932B", "#EB4D4B"],
       },
       {
-        id: 'vintage-text',
-        name: 'Text Only',
-        description: 'Retro typography without graphics',
-        colors: ['#F0932B', '#EB4D4B']
-      }
-    ]
+        id: "vintage-text",
+        name: "Text Only",
+        description: "Retro typography without graphics",
+        colors: ["#F0932B", "#EB4D4B"],
+      },
+    ],
   },
   {
     id: 3,
     title: "Nature's Beauty",
+    designerId: "emma-wilson",
     designer: {
-      name: 'Emma Wilson',
-      avatar: 'https://i.pravatar.cc/150?img=5',
-      bio: 'Nature photographer and botanical illustrator'
+      name: "Emma Wilson",
+      avatar: "https://i.pravatar.cc/150?img=5",
+      bio: "Nature photographer and botanical illustrator",
     },
     rating: 5.0,
     downloads: 1890,
     price: 18.99,
-    category: 'Nature',
+    category: "Nature",
     trending: false,
-    colors: ['#6AB04C', '#22A6B3', '#30336B'],
+    colors: ["#6AB04C", "#22A6B3", "#30336B"],
     description:
-      'Stunning botanical illustration featuring intricate details of natural elements. Perfect for nature lovers and eco-conscious individuals.',
+      "Stunning botanical illustration featuring intricate details of natural elements. Perfect for nature lovers and eco-conscious individuals.",
     images: {
-      front: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-      back: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-      left: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-      right: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800'
+      front: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+      back: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+      left: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+      right: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
     },
-    tags: ['Nature', 'Botanical', 'Organic', 'Green'],
-    compatibleProducts: ['t-shirts', 'hoodies', 'accessories', 'premium'],
-    materials: 'Best on organic cotton and eco-friendly fabrics',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL'],
+    tags: ["Nature", "Botanical", "Organic", "Green"],
+    compatibleProducts: ["t-shirts", "hoodies", "accessories", "premium"],
+    materials: "Best on organic cotton and eco-friendly fabrics",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     variations: [
       {
-        id: 'nature-full',
-        name: 'Full Botanical',
-        description: 'Complete botanical illustration',
-        colors: ['#6AB04C', '#22A6B3', '#30336B']
+        id: "nature-full",
+        name: "Full Botanical",
+        description: "Complete botanical illustration",
+        colors: ["#6AB04C", "#22A6B3", "#30336B"],
       },
       {
-        id: 'nature-leaf',
-        name: 'Single Leaf',
-        description: 'Minimalist single leaf design',
-        colors: ['#6AB04C', '#22A6B3']
+        id: "nature-leaf",
+        name: "Single Leaf",
+        description: "Minimalist single leaf design",
+        colors: ["#6AB04C", "#22A6B3"],
       },
       {
-        id: 'nature-border',
-        name: 'Floral Border',
-        description: 'Decorative floral border pattern',
-        colors: ['#22A6B3', '#30336B']
-      }
-    ]
+        id: "nature-border",
+        name: "Floral Border",
+        description: "Decorative floral border pattern",
+        colors: ["#22A6B3", "#30336B"],
+      },
+    ],
   },
   {
     id: 4,
-    title: 'Urban Street',
+    title: "Urban Street",
+    designerId: "alex-turner",
     designer: {
-      name: 'Alex Turner',
-      avatar: 'https://i.pravatar.cc/150?img=8',
-      bio: 'Street artist and graffiti designer from NYC'
+      name: "Alex Turner",
+      avatar: "https://i.pravatar.cc/150?img=8",
+      bio: "Street artist and graffiti designer from NYC",
     },
     rating: 4.7,
     downloads: 2650,
     price: 14.99,
-    category: 'Street Art',
+    category: "Street Art",
     trending: true,
-    colors: ['#000000', '#FFFFFF', '#FF6348'],
+    colors: ["#000000", "#FFFFFF", "#FF6348"],
     description:
-      'Bold street art design with urban edge. Inspired by the vibrant graffiti culture of metropolitan cities.',
+      "Bold street art design with urban edge. Inspired by the vibrant graffiti culture of metropolitan cities.",
     images: {
       front:
-        'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800',
-      back: 'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800',
-      left: 'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800',
+        "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800",
+      back: "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800",
+      left: "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800",
       right:
-        'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800'
+        "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800",
     },
-    tags: ['Street Art', 'Urban', 'Graffiti', 'Bold'],
-    compatibleProducts: ['t-shirts', 'hoodies', 'accessories'],
-    materials: 'High-quality print on any fabric type',
-    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    tags: ["Street Art", "Urban", "Graffiti", "Bold"],
+    compatibleProducts: ["t-shirts", "hoodies", "accessories"],
+    materials: "High-quality print on any fabric type",
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
     variations: [
       {
-        id: 'urban-graffiti',
-        name: 'Graffiti Tag',
-        description: 'Bold street art graffiti style',
-        colors: ['#000000', '#FFFFFF', '#FF6348']
+        id: "urban-graffiti",
+        name: "Graffiti Tag",
+        description: "Bold street art graffiti style",
+        colors: ["#000000", "#FFFFFF", "#FF6348"],
       },
       {
-        id: 'urban-stencil',
-        name: 'Stencil Art',
-        description: 'Clean stencil design',
-        colors: ['#000000', '#FF6348']
-      }
-    ]
+        id: "urban-stencil",
+        name: "Stencil Art",
+        description: "Clean stencil design",
+        colors: ["#000000", "#FF6348"],
+      },
+    ],
   },
   {
     id: 5,
-    title: 'Cosmic Journey',
+    title: "Cosmic Journey",
+    designerId: "luna-park",
     designer: {
-      name: 'Luna Park',
-      avatar: 'https://i.pravatar.cc/150?img=9',
-      bio: 'Space enthusiast and digital artist'
+      name: "Luna Park",
+      avatar: "https://i.pravatar.cc/150?img=9",
+      bio: "Space enthusiast and digital artist",
     },
     rating: 4.9,
     downloads: 3450,
     price: 16.99,
-    category: 'Space',
+    category: "Space",
     trending: false,
-    colors: ['#5F27CD', '#341F97', '#00D2D3'],
+    colors: ["#5F27CD", "#341F97", "#00D2D3"],
     description:
-      'Embark on a cosmic journey through the stars with this mesmerizing space-themed design. Features galaxies, nebulas, and celestial wonders.',
+      "Embark on a cosmic journey through the stars with this mesmerizing space-themed design. Features galaxies, nebulas, and celestial wonders.",
     images: {
       front:
-        'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800',
-      back: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800',
-      left: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800',
+        "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800",
+      back: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800",
+      left: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800",
       right:
-        'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800'
+        "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800",
     },
-    tags: ['Space', 'Cosmic', 'Galaxy', 'Astronomy'],
-    compatibleProducts: ['t-shirts', 'hoodies', 'accessories', 'premium'],
-    materials: 'Vibrant colors on dark fabrics recommended',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'],
+    tags: ["Space", "Cosmic", "Galaxy", "Astronomy"],
+    compatibleProducts: ["t-shirts", "hoodies", "accessories", "premium"],
+    materials: "Vibrant colors on dark fabrics recommended",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
     variations: [
       {
-        id: 'cosmic-galaxy',
-        name: 'Galaxy Swirl',
-        description: 'Full galaxy with nebula effects',
-        colors: ['#5F27CD', '#341F97', '#00D2D3']
+        id: "cosmic-galaxy",
+        name: "Galaxy Swirl",
+        description: "Full galaxy with nebula effects",
+        colors: ["#5F27CD", "#341F97", "#00D2D3"],
       },
       {
-        id: 'cosmic-stars',
-        name: 'Star Field',
-        description: 'Scattered stars pattern',
-        colors: ['#00D2D3', '#5F27CD']
+        id: "cosmic-stars",
+        name: "Star Field",
+        description: "Scattered stars pattern",
+        colors: ["#00D2D3", "#5F27CD"],
       },
       {
-        id: 'cosmic-planet',
-        name: 'Planet Focus',
-        description: 'Single planet with cosmic background',
-        colors: ['#341F97', '#00D2D3']
-      }
-    ]
+        id: "cosmic-planet",
+        name: "Planet Focus",
+        description: "Single planet with cosmic background",
+        colors: ["#341F97", "#00D2D3"],
+      },
+    ],
   },
   {
     id: 6,
-    title: 'Minimalist Wave',
+    title: "Minimalist Wave",
+    designerId: "john-davis",
     designer: {
-      name: 'John Davis',
-      avatar: 'https://i.pravatar.cc/150?img=13',
-      bio: 'Minimalist designer focused on clean aesthetics'
+      name: "John Davis",
+      avatar: "https://i.pravatar.cc/150?img=13",
+      bio: "Minimalist designer focused on clean aesthetics",
     },
     rating: 4.6,
     downloads: 1720,
     price: 11.99,
-    category: 'Minimal',
+    category: "Minimal",
     trending: false,
-    colors: ['#2C3E50', '#3498DB', '#ECF0F1'],
+    colors: ["#2C3E50", "#3498DB", "#ECF0F1"],
     description:
-      'Clean and elegant minimalist wave design. Perfect for those who appreciate simplicity and sophistication.',
+      "Clean and elegant minimalist wave design. Perfect for those who appreciate simplicity and sophistication.",
     images: {
-      front: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-      back: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-      left: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-      right: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800'
+      front: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+      back: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+      left: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+      right: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
     },
-    tags: ['Minimal', 'Clean', 'Simple', 'Elegant'],
-    compatibleProducts: ['t-shirts', 'hoodies', 'business', 'premium'],
-    materials: 'Works on all fabric types',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL'],
+    tags: ["Minimal", "Clean", "Simple", "Elegant"],
+    compatibleProducts: ["t-shirts", "hoodies", "business", "premium"],
+    materials: "Works on all fabric types",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     variations: [
       {
-        id: 'minimal-wave',
-        name: 'Wave Line',
-        description: 'Single elegant wave line',
-        colors: ['#2C3E50', '#3498DB']
+        id: "minimal-wave",
+        name: "Wave Line",
+        description: "Single elegant wave line",
+        colors: ["#2C3E50", "#3498DB"],
       },
       {
-        id: 'minimal-dot',
-        name: 'Dot Accent',
-        description: 'Minimalist dot pattern',
-        colors: ['#3498DB', '#ECF0F1']
-      }
-    ]
-  }
-]
+        id: "minimal-dot",
+        name: "Dot Accent",
+        description: "Minimalist dot pattern",
+        colors: ["#3498DB", "#ECF0F1"],
+      },
+    ],
+  },
+];
 
 export function getDesignById(id: number) {
-  return designsData.find(design => design.id === id)
+  return designsData.find((design) => design.id === id);
 }
 
 export function getAllDesigns() {
-  return designsData
+  return designsData;
+}
+
+export function getDesignsByDesignerId(designerId: string) {
+  return designsData.filter((design) => design.designerId === designerId);
 }
