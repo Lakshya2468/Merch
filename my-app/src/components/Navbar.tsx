@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { Menu, Search, ShoppingCart, User, X } from 'lucide-react'
-import Link from 'next/link'
-import { useState } from 'react'
-import ProductCategoryModal from './ProductCategoryModal'
+import { Menu, Search, ShoppingCart, User, X } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import ProductCategoryModal from "./ProductCategoryModal";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-md">
@@ -34,6 +34,12 @@ export default function Navbar() {
               className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
             >
               Designs
+            </Link>
+            <Link
+              href="/designers"
+              className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
+            >
+              Designers
             </Link>
             <Link
               href="/categories"
@@ -117,6 +123,13 @@ export default function Navbar() {
               Designs
             </Link>
             <Link
+              href="/designers"
+              className="block text-gray-700 hover:text-purple-600 py-2 font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Designers
+            </Link>
+            <Link
               href="/categories"
               className="block text-gray-700 hover:text-purple-600 py-2 font-medium"
               onClick={() => setIsMenuOpen(false)}
@@ -125,8 +138,8 @@ export default function Navbar() {
             </Link>
             <button
               onClick={() => {
-                setIsCategoryModalOpen(true)
-                setIsMenuOpen(false)
+                setIsCategoryModalOpen(true);
+                setIsMenuOpen(false);
               }}
               className="block text-left w-full text-gray-700 hover:text-purple-600 py-2 font-medium"
             >
@@ -155,5 +168,5 @@ export default function Navbar() {
         onClose={() => setIsCategoryModalOpen(false)}
       />
     </nav>
-  )
+  );
 }
